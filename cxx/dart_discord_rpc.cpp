@@ -23,24 +23,25 @@ extern "C" {
 
 /* The three arguments in this function correspond to `NativeApi.postCObject` &
  * `receiver.sendPort.nativePort` (of a ReceivePort). */
-DLLEXPORT void DartInitialize(Dart_PostCObjectType dart_post_C_object,
-                              Dart_Port callback_port) {
+DLLEXPORT void DiscordRPCInitialize(Dart_PostCObjectType dart_post_C_object,
+                                    Dart_Port callback_port) {
   g_dart_post_C_object = dart_post_C_object;
   g_callback_port = callback_port;
 }
 
-DLLEXPORT void DiscordRegister(const char* application_id,
-                               const char* command) {
+DLLEXPORT void DiscordRPCRegister(const char* application_id,
+                                  const char* command) {
   Discord_Register(application_id, command);
 };
 
-DLLEXPORT void DiscordRegisterSteamGame(const char* application_id,
-                                        const char* steam_id) {
+DLLEXPORT void DiscordRPCRegisterSteamGame(const char* application_id,
+                                           const char* steam_id) {
   Discord_RegisterSteamGame(application_id, steam_id);
 };
 
-DLLEXPORT void DiscordInitialize(const char* application_id, int auto_register,
-                                 const char* optional_steam_id) {
+DLLEXPORT void DiscordRPCStart(const char* application_id,
+                               int32_t auto_register,
+                               const char* optional_steam_id) {
   struct DiscordEventHandlers event_handlers;
   event_handlers.ready = Ready;
   event_handlers.disconnected = Disconnected;
@@ -53,14 +54,14 @@ DLLEXPORT void DiscordInitialize(const char* application_id, int auto_register,
   Discord_RunCallbacks();
 }
 
-DLLEXPORT void DiscordShutdown() { Discord_Shutdown(); };
+DLLEXPORT void DiscordRPCShutdown() { Discord_Shutdown(); };
 
-DLLEXPORT void DiscordUpdatePresence(
+DLLEXPORT void DiscordRPCUpdatePresence(
     const char* state, const char* details, int64_t start_time_stamp,
     int64_t end_time_stamp, const char* large_image_key,
     const char* large_image_text, const char* small_image_key,
-    const char* small_image_text, const char* party_id, int party_size,
-    int party_max, const char* match_secret, const char* join_secret,
+    const char* small_image_text, const char* party_id, int32_t party_size,
+    int32_t party_max, const char* match_secret, const char* join_secret,
     const char* spectate_secret, int8_t instance) {
   struct DiscordRichPresence rich_presence;
   rich_presence.state = state;
@@ -80,9 +81,9 @@ DLLEXPORT void DiscordUpdatePresence(
   Discord_UpdatePresence(&rich_presence);
 }
 
-DLLEXPORT void DiscordClearPresence() { Discord_ClearPresence(); };
+DLLEXPORT void DiscordRPCClearPresence() { Discord_ClearPresence(); };
 
-DLLEXPORT void DiscordRespond(const char* user_id, int reply) {
+DLLEXPORT void DiscordRPCRespond(const char* user_id, int32_t reply) {
   Discord_Respond(user_id, reply);
 };
 
