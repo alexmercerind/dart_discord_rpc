@@ -2,7 +2,8 @@
 <h4 align='center'>Discord Rich Presence for Flutter & Dart apps & games.</h4>
 <br></br>
 
-<img src='https://github.com/alexmercerind/dart_discord_rpc/blob/master/image.png?raw=true'></img>
+<p align='center'><img height='160' src='https://github.com/alexmercerind/dart_discord_rpc/blob/master/image.png?raw=true'></img>
+</p>
 
 ## Install 
 
@@ -26,7 +27,7 @@ dependencies:
 
 For integrating Discord Rich Presence into your application or game, you must create an application at [Discord Developer Portal](https://discord.com/developers/applications).
 
-Initialize the plugin.
+**Initialize the plugin.**
 
 ```dart
 void main() {
@@ -35,7 +36,7 @@ void main() {
 }
 ```
 
-Instantiate `DiscordRPC` class.
+**Instantiate class.**
 
 ```dart
 DiscordRPC rpc = DiscordRPC(
@@ -43,7 +44,7 @@ DiscordRPC rpc = DiscordRPC(
 );
 ```
 
-Set or change the user presence.
+**Set or change the user presence.**
 
 ```dart
 rpc.start(autoRegister: true);
@@ -60,13 +61,13 @@ rpc.updatePresence(
 );
 ```
 
-Clear the user presence.
+**Clear the user presence.**
 
 ```dart
 rpc.clearPresence();
 ```
 
-Listen to the events.
+**Listen to the events.**
 
 ```dart
 rpc.events.listen((event) {
