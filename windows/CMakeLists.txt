@@ -2,11 +2,10 @@ cmake_minimum_required(VERSION 3.15)
 set(PROJECT_NAME "dart_discord_rpc")
 project(${PROJECT_NAME} LANGUAGES CXX)
 
-# This value is used when generating builds using this plugin, so it must
-# not be changed
 set(PLUGIN_NAME "dart_discord_rpc_plugin")
 
-add_library(${PLUGIN_NAME} SHARED
+add_library(
+  ${PLUGIN_NAME} SHARED
   "dart_discord_rpc_plugin.cpp"
 )
 apply_standard_settings(${PLUGIN_NAME})
@@ -17,8 +16,11 @@ target_include_directories(${PLUGIN_NAME} INTERFACE
   "${CMAKE_CURRENT_SOURCE_DIR}/include")
 target_link_libraries(${PLUGIN_NAME} PRIVATE flutter flutter_wrapper_plugin)
 
-# List of absolute paths to libraries that should be bundled with the plugin
+# Adding pre-compiled shared library because Discord's clang-format will give warnings if added with sub_directory.
+# If I compile on user's machine statically, _ITERATOR_DEBUG_LEVEL mismatch will happen.
+# And, in case of a dynamic link, crash will happen in Debug mode. 
+
 set(dart_discord_rpc_bundled_libraries
-  ""
+  "${CMAKE_CURRENT_SOURCE_DIR}/bin/dart_discord_rpc.dll"
   PARENT_SCOPE
 )

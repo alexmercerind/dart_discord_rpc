@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
 import 'package:dart_discord_rpc/dart_discord_rpc.dart';
 
 void main() {
+  DiscordRPC.initialize();
   runApp(MyApp());
 }
 
@@ -14,34 +12,25 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+  DiscordRPC discord = DiscordRPC(
+    applicationId: '877853131025809438',
+  );
 
   @override
   void initState() {
     super.initState();
-    initPlatformState();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
-    try {
-      platformVersion =
-          await DartDiscordRpc.platformVersion ?? 'Unknown platform version';
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
+    discord.start(autoRegister: true);
+    discord.updatePresence(
+      DiscordPresence(
+        state: 'Discord Rich Presence from Dart. 🎯',
+        details: 'github.com/alexmercerind/dart_discord_rpc',
+        startTimeStamp: DateTime.now().millisecondsSinceEpoch,
+        largeImageKey: 'large_image',
+        largeImageText: 'This text describes the large image.',
+        smallImageKey: 'small_image',
+        smallImageText: 'This text describes the small image.',
+      ),
+    );
   }
 
   @override
@@ -49,10 +38,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('dart_discord_rpc'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Text('Open Discord to see the plugin working.'),
         ),
       ),
     );
