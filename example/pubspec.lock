@@ -60,9 +60,9 @@ packages:
   dart_discord_rpc_ffi:
     dependency: transitive
     description:
-      path: "../ffi"
-      relative: true
-    source: path
+      name: dart_discord_rpc_ffi
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.0.1"
   fake_async:
     dependency: transitive
