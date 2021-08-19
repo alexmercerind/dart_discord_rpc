@@ -1,6 +1,8 @@
 name: dart_discord_rpc_ffi
-description: FFI & NativePorts interface to Discord RPC.
-version: 1.0.0
+description: Internal dependency package for dart_discord_rpc.
+repository: https://github.com/alexmercerind/dart_discord_rpc
+homepage: https://github.com/alexmercerind/dart_discord_rpc
+version: 0.0.1
 
 environment:
   sdk: '>=2.12.0 <3.0.0'

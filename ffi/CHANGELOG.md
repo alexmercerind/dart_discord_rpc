@@ -1,3 +1,3 @@
-## 1.0.0
+## 0.0.1
 
-- Initial version.
+- Initial version. Add FFI bindings to `dart_discord_rpc` shared library.
