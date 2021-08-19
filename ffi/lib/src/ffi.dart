@@ -6,7 +6,7 @@ late DynamicLibrary dynamicLibrary;
 ReceivePort receiver = ReceivePort();
 
 abstract class DiscordRPCFFI {
-  DiscordRPCInitializeDart initialize = dynamicLibrary.lookupFunction<
+  static DiscordRPCInitializeDart initialize = dynamicLibrary.lookupFunction<
       DiscordRPCInitializeCXX,
       DiscordRPCInitializeDart>('DiscordRPCInitialize');
 
