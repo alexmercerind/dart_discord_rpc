@@ -106,13 +106,4 @@ MIT. Contributions welcomed.
 Supported
 
 - Windows
-
-Coming Soon
-
 - Linux
-- Android
-
-Unsupported
-
-- macOS
-- iOS
