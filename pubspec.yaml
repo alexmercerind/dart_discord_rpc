@@ -1,0 +1,28 @@
+name: dart_discord_rpc
+description: Discord Rich Presence for Flutter & Dart apps & games.
+version: 0.0.1
+repository: https://github.com/alexmercerind/dart_discord_rpc
+homepage: https://github.com/alexmercerind/dart_discord_rpc
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.20.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dart_discord_rpc_ffi:
+    path: ./ffi
+  path: ^1.8.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  plugin:
+    platforms:
+      linux:
+        pluginClass: DartDiscordRpcPlugin
+      windows:
+        pluginClass: DartDiscordRpcPlugin
