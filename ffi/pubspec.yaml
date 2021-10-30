@@ -3,9 +3,10 @@ description: Internal dependency package for dart_discord_rpc.
 repository: https://github.com/alexmercerind/dart_discord_rpc
 homepage: https://github.com/alexmercerind/dart_discord_rpc
 version: 0.0.2
+publish_to: none
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   path: ^1.8.0
@@ -17,11 +18,11 @@ dev_dependencies:
   ffigen: ^3.0.0
 
 ffigen:
-  output: 'lib/generated/bindings.dart'
+  output: "lib/generated/bindings.dart"
   dart-bool: true
   headers:
     entry-points:
-      - 'headers/discord_register.h'
-      - 'headers/discord_rpc.h'
-  name: 'DiscordRPC'
-  description: 'Dart bindings to Discord RPC client.'
+      - "headers/discord_register.h"
+      - "headers/discord_rpc.h"
+  name: "DiscordRPC"
+  description: "Dart bindings to Discord RPC client."
