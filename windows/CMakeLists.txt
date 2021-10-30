@@ -17,6 +17,6 @@ target_include_directories(${PLUGIN_NAME} INTERFACE
 target_link_libraries(${PLUGIN_NAME} PRIVATE flutter flutter_wrapper_plugin)
 
 set(dart_discord_rpc_bundled_libraries
-  ${CMAKE_CURRENT_SOURCE_DIR}/bin/discord-rpc.dll
+  ${CMAKE_CURRENT_SOURCE_DIR}/bin/discord_game_sdk.dll
   PARENT_SCOPE
 )

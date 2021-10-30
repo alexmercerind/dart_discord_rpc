@@ -17,6 +17,6 @@ target_link_libraries(${PLUGIN_NAME} PRIVATE flutter)
 target_link_libraries(${PLUGIN_NAME} PRIVATE PkgConfig::GTK)
 
 set(dart_discord_rpc_bundled_libraries
-  ${CMAKE_CURRENT_SOURCE_DIR}/bin/libdiscord-rpc.so
+  ${CMAKE_CURRENT_SOURCE_DIR}/bin/discord_game_sdk.so
   PARENT_SCOPE
 )

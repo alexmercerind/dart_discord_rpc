@@ -22,7 +22,8 @@ ffigen:
   dart-bool: true
   headers:
     entry-points:
-      - "headers/discord_register.h"
-      - "headers/discord_rpc.h"
-  name: "DiscordRPC"
-  description: "Dart bindings to Discord RPC client."
+      - "headers/discord_game_sdk.h"
+  name: "DiscordClient"
+  description: "Dart bindings to Discord Game SDK client."
+  llvm-path:
+   - /usr/lib/llvm-13

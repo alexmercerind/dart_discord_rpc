@@ -47,8 +47,10 @@ packages:
     dependency: "direct main"
     description:
       path: ffi
-      relative: true
-    source: path
+      ref: HEAD
+      resolved-ref: "4c730d6b02b1a0aedb130f408b176f193958e852"
+      url: "https://github.com/RPMTW/dart_discord_rpc.git"
+    source: git
     version: "0.0.2"
   fake_async:
     dependency: transitive
@@ -158,4 +160,4 @@ packages:
     version: "2.1.1"
 sdks:
   dart: ">=2.14.0 <3.0.0"
-  flutter: ">=1.20.0"
+  flutter: ">=2.5.0"
