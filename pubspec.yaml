@@ -26,3 +26,5 @@ flutter:
         pluginClass: DartDiscordRpcPlugin
       windows:
         pluginClass: DartDiscordRpcPlugin
+      macos:
+        pluginClass: DartDiscordRpcPlugin 

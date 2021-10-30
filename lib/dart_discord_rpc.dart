@@ -64,14 +64,16 @@ class DiscordRPC extends ffi.DiscordRPC {
           'libdiscord-rpc.so',
         ),
       );
-    }
-    if (Platform.isWindows) {
+    } else if (Platform.isWindows) {
       _dynamicLibrary = DynamicLibrary.open(
         join(
           dirname(Platform.resolvedExecutable),
           'discord-rpc.dll',
         ),
       );
+    } else if (Platform.isMacOS) {
+      _dynamicLibrary = DynamicLibrary.open(
+          join(dirname(dirname(Platform.resolvedExecutable)), "libdiscord-rpc.dylib"));
     }
   }
 }
