@@ -61,7 +61,7 @@ class DiscordRPC extends ffi.DiscordRPC {
         join(
           dirname(Platform.resolvedExecutable),
           'lib',
-          'libdiscord-rpc.so',
+          'discord_game_sdk.so',
         ),
       );
     } else if (Platform.isWindows) {
