@@ -20,3 +20,7 @@ set(dart_discord_rpc_bundled_libraries
   ${CMAKE_CURRENT_SOURCE_DIR}/bin/libdiscord-rpc.so
   PARENT_SCOPE
 )
+set(dart_discord_rpc_bundled_libraries
+  ${CMAKE_CURRENT_SOURCE_DIR}/bin/discord_game_sdk.so
+  PARENT_SCOPE
+)
