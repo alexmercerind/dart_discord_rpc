@@ -5,23 +5,15 @@
 <p align='center'><img height='160' src='https://github.com/alexmercerind/dart_discord_rpc/blob/master/image.png?raw=true'></img>
 </p>
 
-## Install 
+## Install
 
 **Flutter**
 
-```yaml
-dependencies:
-  ..
-  dart_discord_rpc: ^0.0.1
-```
+`flutter pub add dart_discord_rpc`
 
 **Dart CLI**
 
-```yaml
-dependencies:
-  ..
-  dart_discord_rpc_ffi: ^0.0.1
-```
+`dart pub add dart_discord_rpc`
 
 ## Documentation
 
@@ -93,15 +85,15 @@ Consider supporting the project by starring the repository or buying me a coffee
 
 <a href='https://www.buymeacoffee.com/alexmercerind'><img src='https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=alexmercerind&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff'></a>
 
-
-## License 
+## License
 
 Copyright (c) 2021 Hitesh Kumar Saini <saini123hitesh@gmail.com>
 
 MIT. Contributions welcomed.
 
+See [COPYRIGHT](https://github.com/alexmercerind/dart_discord_rpc/blob/master/COPYRIGHT) for comprehensive licensing information.
 
-## Platforms 
+## Platforms
 
 Supported
 
