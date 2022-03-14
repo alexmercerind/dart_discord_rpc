@@ -6,18 +6,13 @@ homepage: https://github.com/alexmercerind/dart_discord_rpc
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
-  flutter: ">=1.20.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
-  dart_discord_rpc_ffi:
-    path: ./ffi
+  ffi: ^1.1.2
   path: ^1.8.0
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  ffigen: ^4.1.3
 
 flutter:
   plugin:
@@ -26,3 +21,13 @@ flutter:
         pluginClass: DartDiscordRpcPlugin
       windows:
         pluginClass: DartDiscordRpcPlugin
+
+ffigen:
+  output: "lib/generated/bindings.dart"
+  dart-bool: true
+  headers:
+    entry-points:
+      - "headers/discord_register.h"
+      - "headers/discord_rpc.h"
+  name: "DiscordRPC"
+  description: "Dart bindings to Discord RPC client."
