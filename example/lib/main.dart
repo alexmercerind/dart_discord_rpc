@@ -12,23 +12,25 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  DiscordRPC discord = DiscordRPC(
-    applicationId: '877853131025809438',
-  );
+  final rpc = DiscordRPC(applicationId: '877853131025809438');
 
   @override
   void initState() {
     super.initState();
-    discord.start(autoRegister: true);
-    discord.updatePresence(
+    rpc.start(autoRegister: true);
+    rpc.updatePresence(
       DiscordPresence(
-        state: 'Discord Rich Presence from Dart. 🎯',
-        details: 'github.com/alexmercerind/dart_discord_rpc',
+        state: 'dart_rpc_rpc',
+        details: 'github.com/alexmercerind',
         startTimeStamp: DateTime.now().millisecondsSinceEpoch,
         largeImageKey: 'large_image',
         largeImageText: 'This text describes the large image.',
         smallImageKey: 'small_image',
         smallImageText: 'This text describes the small image.',
+        button1Label: 'GitHub',
+        button1Url: 'https://github.com/alexmercerind',
+        button2Label: 'Google',
+        button2Url: 'https://www.google.com',
       ),
     );
   }
@@ -38,7 +40,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('dart_discord_rpc'),
+          title: const Text('dart_rpc_rpc'),
         ),
         body: Center(
           child: Text('Open Discord to see the plugin working.'),
