@@ -1,7 +1,5 @@
 import 'model/discord_presence.dart';
 
-// Stub implementation for unsupported platforms.
-// This prevents errors when compiling for web.
 class DiscordRPC {
   DiscordRPC({
     required String applicationId,
