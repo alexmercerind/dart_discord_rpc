@@ -77,10 +77,6 @@ class DiscordRPC {
     final button2Label = presence.button2Label?.toNativeUtf8() ?? nullptr;
     final button2Url = presence.button2Url?.toNativeUtf8() ?? nullptr;
     final instance = presence.instance ?? 0;
-    print(button1Label.address);
-    print(button1Url.address);
-    print(button2Label.address);
-    print(button2Url.address);
     ptr.ref.state = state.cast();
     ptr.ref.details = details.cast();
     ptr.ref.startTimestamp = startTimeStamp;
