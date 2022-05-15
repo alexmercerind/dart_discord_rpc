@@ -7,49 +7,17 @@ import 'generated/bindings.dart' as bindings;
 
 DynamicLibrary? _dynamicLibrary;
 
-/// ## Discord Rich Presence for Dart & Flutter.
-///
-/// For integrating Discord Rich Presence into your application or game, you must create an
-/// application at [Discord Developer Portal](https://discord.com/developers/applications).
-///
-/// Initialize the plugin.
-/// ```dart
-/// void main() {
-///   DiscordRPC.initialize();
-///   runApp(MyApp());
-/// }
-/// ```
-///
-/// Example
-///
-/// ```dart
-/// var rpc = DiscordRPC(
-///   applicationId: '877853131025809438',
-/// );
-/// rpc.start(autoRegister: true);
-/// rpc.updatePresence(
-///   DiscordPresence(
-///     state: 'Discord Rich Presence from Dart. 🎯',
-///     details: 'github.com/alexmercerind/dart_discord_rpc',
-///     startTimeStamp: DateTime.now().millisecondsSinceEpoch,
-///     largeImageKey: 'large_image',
-///     largeImageText: 'This text describes the large image.',
-///     smallImageKey: 'small_image',
-///     smallImageText: 'This text describes the small image.',
-///   ),
-/// );
-/// ```
-///
 class DiscordRPC {
-  /// ID of your application at Discord Developer Portal.
   final String applicationId;
 
-  /// Steam ID.
   final String? steamId;
 
   late bindings.DiscordRPC _bindings;
 
-  DiscordRPC({required this.applicationId, this.steamId}) {
+  DiscordRPC({
+    required this.applicationId,
+    this.steamId,
+  }) {
     final library = _dynamicLibrary;
     if (library == null) {
       throw Exception(
@@ -59,91 +27,142 @@ class DiscordRPC {
     _bindings = bindings.DiscordRPC(library);
   }
 
-  /// Registers the rich presence client.
   void register(String command) {
-    _bindings.Discord_Register(
-      applicationId.toNativeUtf8().cast<Int8>(),
-      command.toNativeUtf8().cast<Int8>(),
-    );
+    final ptr0 = applicationId.toNativeUtf8().cast<Int8>();
+    final ptr1 = command.toNativeUtf8().cast<Int8>();
+    _bindings.Discord_Register(ptr0, ptr1);
+    calloc.free(ptr0);
+    calloc.free(ptr1);
   }
 
-  /// Registers the steam game.
   void registerSteamGame() {
-    _bindings.Discord_RegisterSteamGame(
-      applicationId.toNativeUtf8().cast<Int8>(),
-      (steamId ?? '').toNativeUtf8().cast<Int8>(),
-    );
+    final ptr0 = applicationId.toNativeUtf8().cast<Int8>();
+    final ptr1 = (steamId?.toNativeUtf8() ?? nullptr).cast<Int8>();
+    _bindings.Discord_RegisterSteamGame(ptr0, ptr1);
+    calloc.free(ptr0);
+    calloc.free(ptr1);
   }
 
-  /// Starts the Discord Rich Presence.
   void start({bool autoRegister = false}) {
+    final ptr0 = applicationId.toNativeUtf8().cast<Int8>();
+    final ptr1 = (steamId?.toNativeUtf8() ?? nullptr).cast<Int8>();
     _bindings.Discord_Initialize(
-      applicationId.toNativeUtf8().cast<Int8>(),
+      ptr0,
       calloc<bindings.DiscordEventHandlers>(),
       autoRegister == false ? 0 : 1,
-      (steamId ?? '').toNativeUtf8().cast<Int8>(),
+      ptr1,
     );
+    calloc.free(ptr0);
+    calloc.free(ptr1);
   }
 
-  /// Updates the presence of the [DiscordUser], takes [DiscordPresence] as argument.
-  /// Describing current user presence inside the application or game.
-  ///
-  /// For showing the user's start time from present, you must pass [DiscordPresence.startTimeStamp] as `DateTime.now().millisecondsSinceEpoch`.
-  ///
   void updatePresence(DiscordPresence presence) {
-    var presencePtr = calloc<bindings.DiscordRichPresence>();
-    presencePtr.ref.state = (presence.state ?? '').toNativeUtf8().cast<Int8>();
-    presencePtr.ref.details =
-        (presence.details ?? '').toNativeUtf8().cast<Int8>();
-    presencePtr.ref.startTimestamp = presence.startTimeStamp ?? 0;
-    presencePtr.ref.endTimestamp = presence.endTimeStamp ?? 0;
-    presencePtr.ref.largeImageKey =
-        (presence.largeImageKey ?? '').toNativeUtf8().cast<Int8>();
-    presencePtr.ref.largeImageText =
-        (presence.largeImageText ?? '').toNativeUtf8().cast<Int8>();
-    presencePtr.ref.smallImageKey =
-        (presence.smallImageKey ?? '').toNativeUtf8().cast<Int8>();
-    presencePtr.ref.smallImageText =
-        (presence.smallImageText ?? '').toNativeUtf8().cast<Int8>();
-    presencePtr.ref.partySize = presence.partySize ?? 0;
-    presencePtr.ref.matchSecret =
-        (presence.matchSecret ?? '').toNativeUtf8().cast<Int8>();
-    presencePtr.ref.joinSecret =
-        (presence.joinSecret ?? '').toNativeUtf8().cast<Int8>();
-    presencePtr.ref.spectateSecret =
-        (presence.spectateSecret ?? '').toNativeUtf8().cast<Int8>();
-    presencePtr.ref.instance = presence.instance ?? 0;
-    _bindings.Discord_UpdatePresence(presencePtr);
-    calloc.free(presencePtr);
+    final ptr = calloc<bindings.DiscordRichPresence>();
+    final state = presence.state?.toNativeUtf8() ?? nullptr;
+    final details = presence.details?.toNativeUtf8() ?? nullptr;
+    final startTimeStamp = presence.startTimeStamp ?? 0;
+    final endTimeStamp = presence.endTimeStamp ?? 0;
+    final largeImageKey = presence.largeImageKey?.toNativeUtf8() ?? nullptr;
+    final largeImageText = presence.largeImageText?.toNativeUtf8() ?? nullptr;
+    final smallImageKey = presence.smallImageKey?.toNativeUtf8() ?? nullptr;
+    final smallImageText = presence.smallImageText?.toNativeUtf8() ?? nullptr;
+    final partyId = presence.partyId?.toNativeUtf8() ?? nullptr;
+    final partySize = presence.partySize ?? 0;
+    final partyMax = presence.partySizeMax ?? 0;
+    final matchSecret = presence.matchSecret?.toNativeUtf8() ?? nullptr;
+    final joinSecret = presence.joinSecret?.toNativeUtf8() ?? nullptr;
+    final spectateSecret = presence.spectateSecret?.toNativeUtf8() ?? nullptr;
+    final button1Label = presence.button1Label?.toNativeUtf8() ?? nullptr;
+    final button1Url = presence.button1Url?.toNativeUtf8() ?? nullptr;
+    final button2Label = presence.button2Label?.toNativeUtf8() ?? nullptr;
+    final button2Url = presence.button2Url?.toNativeUtf8() ?? nullptr;
+    final instance = presence.instance ?? 0;
+    print(button1Label.address);
+    print(button1Url.address);
+    print(button2Label.address);
+    print(button2Url.address);
+    ptr.ref.state = state.cast();
+    ptr.ref.details = details.cast();
+    ptr.ref.startTimestamp = startTimeStamp;
+    ptr.ref.endTimestamp = endTimeStamp;
+    ptr.ref.largeImageKey = largeImageKey.cast();
+    ptr.ref.largeImageText = largeImageText.cast();
+    ptr.ref.smallImageKey = smallImageKey.cast();
+    ptr.ref.smallImageText = smallImageText.cast();
+    ptr.ref.partyId = partyId.cast();
+    ptr.ref.partySize = partySize;
+    ptr.ref.partyMax = partyMax;
+    ptr.ref.matchSecret = matchSecret.cast();
+    ptr.ref.joinSecret = joinSecret.cast();
+    ptr.ref.spectateSecret = spectateSecret.cast();
+    ptr.ref.button_label_1 = button1Label.cast();
+    ptr.ref.button_url_1 = button1Url.cast();
+    ptr.ref.button_label_2 = button2Label.cast();
+    ptr.ref.button_url_2 = button2Url.cast();
+    ptr.ref.instance = instance;
+    _bindings.Discord_UpdatePresence(ptr);
+    calloc.free(ptr);
+    if (state != nullptr) {
+      calloc.free(state);
+    }
+    if (details != nullptr) {
+      calloc.free(details);
+    }
+    if (largeImageKey != nullptr) {
+      calloc.free(largeImageKey);
+    }
+    if (largeImageText != nullptr) {
+      calloc.free(largeImageText);
+    }
+    if (smallImageKey != nullptr) {
+      calloc.free(smallImageKey);
+    }
+    if (smallImageText != nullptr) {
+      calloc.free(smallImageText);
+    }
+    if (partyId != nullptr) {
+      calloc.free(partyId);
+    }
+    if (matchSecret != nullptr) {
+      calloc.free(matchSecret);
+    }
+    if (joinSecret != nullptr) {
+      calloc.free(joinSecret);
+    }
+    if (spectateSecret != nullptr) {
+      calloc.free(spectateSecret);
+    }
+    if (button1Label != nullptr) {
+      calloc.free(button1Label);
+    }
+    if (button1Url != nullptr) {
+      calloc.free(button1Url);
+    }
+    if (button2Label != nullptr) {
+      calloc.free(button2Label);
+    }
+    if (button2Url != nullptr) {
+      calloc.free(button2Url);
+    }
   }
 
-  /// Shuts down the Discord RPC.
   void shutDown() {
     _bindings.Discord_Shutdown();
   }
 
-  /// Clears the previously set [DiscordPresence] for the user.
   void clearPresence() {
     _bindings.Discord_ClearPresence();
   }
 
-  /// Responds to the user.
   void respond(String userId, int reply) {
+    final ptr = userId.toNativeUtf8().cast<Int8>();
     _bindings.Discord_Respond(
-      userId.toNativeUtf8().cast<Int8>(),
+      ptr,
       reply,
     );
+    calloc.free(ptr);
   }
 
-  /// Initializes the plugin.
-  ///
-  /// ```dart
-  /// void main() {
-  ///   DiscordRPC.initialize();
-  ///   runApp(MyApp());
-  /// }
-  /// ```
-  ///
   static void initialize() {
     if (_dynamicLibrary != null) {
       throw Exception("DiscordRPC has already been initialized.");
