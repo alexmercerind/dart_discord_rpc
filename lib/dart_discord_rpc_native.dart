@@ -62,26 +62,26 @@ class DiscordRPC {
   /// Registers the rich presence client.
   void register(String command) {
     _bindings.Discord_Register(
-      applicationId.toNativeUtf8().cast<Int8>(),
-      command.toNativeUtf8().cast<Int8>(),
+      applicationId.toNativeUtf8().cast<Char>(),
+      command.toNativeUtf8().cast<Char>(),
     );
   }
 
   /// Registers the steam game.
   void registerSteamGame() {
     _bindings.Discord_RegisterSteamGame(
-      applicationId.toNativeUtf8().cast<Int8>(),
-      (steamId ?? '').toNativeUtf8().cast<Int8>(),
+      applicationId.toNativeUtf8().cast<Char>(),
+      (steamId ?? '').toNativeUtf8().cast<Char>(),
     );
   }
 
   /// Starts the Discord Rich Presence.
   void start({bool autoRegister = false}) {
     _bindings.Discord_Initialize(
-      applicationId.toNativeUtf8().cast<Int8>(),
+      applicationId.toNativeUtf8().cast<Char>(),
       calloc<bindings.DiscordEventHandlers>(),
       autoRegister == false ? 0 : 1,
-      (steamId ?? '').toNativeUtf8().cast<Int8>(),
+      (steamId ?? '').toNativeUtf8().cast<Char>(),
     );
   }
 
@@ -92,26 +92,26 @@ class DiscordRPC {
   ///
   void updatePresence(DiscordPresence presence) {
     var presencePtr = calloc<bindings.DiscordRichPresence>();
-    presencePtr.ref.state = (presence.state ?? '').toNativeUtf8().cast<Int8>();
+    presencePtr.ref.state = (presence.state ?? '').toNativeUtf8().cast<Char>();
     presencePtr.ref.details =
-        (presence.details ?? '').toNativeUtf8().cast<Int8>();
+        (presence.details ?? '').toNativeUtf8().cast<Char>();
     presencePtr.ref.startTimestamp = presence.startTimeStamp ?? 0;
     presencePtr.ref.endTimestamp = presence.endTimeStamp ?? 0;
     presencePtr.ref.largeImageKey =
-        (presence.largeImageKey ?? '').toNativeUtf8().cast<Int8>();
+        (presence.largeImageKey ?? '').toNativeUtf8().cast<Char>();
     presencePtr.ref.largeImageText =
-        (presence.largeImageText ?? '').toNativeUtf8().cast<Int8>();
+        (presence.largeImageText ?? '').toNativeUtf8().cast<Char>();
     presencePtr.ref.smallImageKey =
-        (presence.smallImageKey ?? '').toNativeUtf8().cast<Int8>();
+        (presence.smallImageKey ?? '').toNativeUtf8().cast<Char>();
     presencePtr.ref.smallImageText =
-        (presence.smallImageText ?? '').toNativeUtf8().cast<Int8>();
+        (presence.smallImageText ?? '').toNativeUtf8().cast<Char>();
     presencePtr.ref.partySize = presence.partySize ?? 0;
     presencePtr.ref.matchSecret =
-        (presence.matchSecret ?? '').toNativeUtf8().cast<Int8>();
+        (presence.matchSecret ?? '').toNativeUtf8().cast<Char>();
     presencePtr.ref.joinSecret =
-        (presence.joinSecret ?? '').toNativeUtf8().cast<Int8>();
+        (presence.joinSecret ?? '').toNativeUtf8().cast<Char>();
     presencePtr.ref.spectateSecret =
-        (presence.spectateSecret ?? '').toNativeUtf8().cast<Int8>();
+        (presence.spectateSecret ?? '').toNativeUtf8().cast<Char>();
     presencePtr.ref.instance = presence.instance ?? 0;
     _bindings.Discord_UpdatePresence(presencePtr);
     calloc.free(presencePtr);
@@ -130,7 +130,7 @@ class DiscordRPC {
   /// Responds to the user.
   void respond(String userId, int reply) {
     _bindings.Discord_Respond(
-      userId.toNativeUtf8().cast<Int8>(),
+      userId.toNativeUtf8().cast<Char>(),
       reply,
     );
   }
