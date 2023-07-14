@@ -44,6 +44,8 @@ class DiscordRPC {
   /// ID of your application at Discord Developer Portal.
   final String applicationId;
 
+  late bool started;
+
   /// Steam ID.
   final String? steamId;
 
@@ -77,6 +79,7 @@ class DiscordRPC {
 
   /// Starts the Discord Rich Presence.
   void start({bool autoRegister = false}) {
+    started = true;
     _bindings.Discord_Initialize(
       applicationId.toNativeUtf8().cast<Int8>(),
       calloc<bindings.DiscordEventHandlers>(),
@@ -119,6 +122,7 @@ class DiscordRPC {
 
   /// Shuts down the Discord RPC.
   void shutDown() {
+    started = false;
     _bindings.Discord_Shutdown();
   }
 

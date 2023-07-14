@@ -8,6 +8,7 @@ class DiscordRPC {
     String? steamId,
   });
 
+  bool started;
   void register(String command) {}
   void registerSteamGame() {}
   void start({bool autoRegister = false}) {}
