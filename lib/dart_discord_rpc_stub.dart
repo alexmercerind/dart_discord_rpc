@@ -8,7 +8,8 @@ class DiscordRPC {
     String? steamId,
   });
 
-  bool started;
+  late bool started;
+  late DiscordPresence presence;
   void register(String command) {}
   void registerSteamGame() {}
   void start({bool autoRegister = false}) {}
