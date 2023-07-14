@@ -46,7 +46,7 @@ class DiscordRPC {
   /// ID of your application at Discord Developer Portal.
   final String applicationId;
 
-  late bool started;
+  bool started = false;
 
   late DiscordPresence presence;
 
