@@ -1,9 +1,11 @@
-import 'dart:io';
 import 'dart:ffi';
+import 'dart:io';
+
 import 'package:ffi/ffi.dart';
 import 'package:path/path.dart';
-import 'model/discord_presence.dart';
+
 import 'generated/bindings.dart' as bindings;
+import 'model/discord_presence.dart';
 
 DynamicLibrary? _dynamicLibrary;
 
@@ -44,6 +46,10 @@ class DiscordRPC {
   /// ID of your application at Discord Developer Portal.
   final String applicationId;
 
+  bool started = false;
+
+  late DiscordPresence presence;
+
   /// Steam ID.
   final String? steamId;
 
@@ -77,6 +83,7 @@ class DiscordRPC {
 
   /// Starts the Discord Rich Presence.
   void start({bool autoRegister = false}) {
+    started = true;
     _bindings.Discord_Initialize(
       applicationId.toNativeUtf8().cast<Int8>(),
       calloc<bindings.DiscordEventHandlers>(),
@@ -91,6 +98,7 @@ class DiscordRPC {
   /// For showing the user's start time from present, you must pass [DiscordPresence.startTimeStamp] as `DateTime.now().millisecondsSinceEpoch`.
   ///
   void updatePresence(DiscordPresence presence) {
+    this.presence = presence;
     var presencePtr = calloc<bindings.DiscordRichPresence>();
     presencePtr.ref.state = (presence.state ?? '').toNativeUtf8().cast<Int8>();
     presencePtr.ref.details =
@@ -119,6 +127,7 @@ class DiscordRPC {
 
   /// Shuts down the Discord RPC.
   void shutDown() {
+    started = false;
     _bindings.Discord_Shutdown();
   }
 
